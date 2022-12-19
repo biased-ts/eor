@@ -1,5 +1,7 @@
 import type { ArrayToTuple } from '../utils/ArrayUtil';
 
+type StrArrOnly = ReadonlyArray<string>;
+
 /**
  * @description Helps to build custom errors. Allows for use of generics to define a preset list of names and messages.
  * @author AceLikesGhosts
@@ -17,16 +19,16 @@ import type { ArrayToTuple } from '../utils/ArrayUtil';
  * new CustomError<readonly ['a', 'b']>('c', 'd'); // Argument of type 'c' is not assignabel to parameter of type 'a' | 'b'.
  * ```
  */
-class CustomError<N extends ReadonlyArray<string>, M extends ReadonlyArray<string>> extends Error
+class CustomError<N extends StrArrOnly, M extends StrArrOnly> extends Error
 {
-    static create<N extends ReadonlyArray<string>, M extends ReadonlyArray<string>>(name: ArrayToTuple<N>, message: ArrayToTuple<M>): CustomError<N, M>;
-    static create<N extends ReadonlyArray<string>, M extends ReadonlyArray<string>>(name: ArrayToTuple<N>, message: ArrayToTuple<M>, stacktrace?: string | null): CustomError<N, M>
+    static create<N extends StrArrOnly, M extends StrArrOnly>(name: ArrayToTuple<N>, message: ArrayToTuple<M>): CustomError<N, M>;
+    static create<N extends StrArrOnly, M extends StrArrOnly>(name: ArrayToTuple<N>, message: ArrayToTuple<M>, stacktrace?: string | null): CustomError<N, M>
     {
         return new this(name, message, stacktrace);
     }
 
-    static createAndThrow<N extends ReadonlyArray<string>, M extends ReadonlyArray<string>>(name: ArrayToTuple<N>, message: ArrayToTuple<M>): void;
-    static createAndThrow<N extends ReadonlyArray<string>, M extends ReadonlyArray<string>>(name: ArrayToTuple<N>, message: ArrayToTuple<M>, stacktrace?: string | null): void
+    static createAndThrow<N extends StrArrOnly, M extends StrArrOnly>(name: ArrayToTuple<N>, message: ArrayToTuple<M>): void;
+    static createAndThrow<N extends StrArrOnly, M extends StrArrOnly>(name: ArrayToTuple<N>, message: ArrayToTuple<M>, stacktrace?: string | null): void
     {
         throw new this(name, message, stacktrace);
     }
