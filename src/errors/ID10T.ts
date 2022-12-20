@@ -1,4 +1,4 @@
-import CustomError from 'src/base/CustomError';
+import CustomError from '../base/CustomError';
 
 /**
  * @description Creates an ID10T Error with a provided message.
